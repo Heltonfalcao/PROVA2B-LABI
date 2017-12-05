@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebAppPB2_HFA.Models.Protocolo>
+
+@{
+    ViewBag.Title = "Protocolos";
+}
+
+<h2>ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Novo Protocolo", "Create")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalhes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enumerador)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detalhes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Enumerador)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar Protocolo", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalhar Protocolo", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Excluir Protocolo", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+@section scripts {
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+       $(document).ready(function () {
+           $('table').dataTable({
+               "order": [[2, "asc"]],
+               "language": {
+                   "url": "@Url.Content("~/scripts")/PTBR.json"
+               }
+           });
+       });
+    </script>
+}
